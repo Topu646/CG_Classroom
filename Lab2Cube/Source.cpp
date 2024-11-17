@@ -284,12 +284,12 @@ int main()
                 glUniform4f(colorLocation, 0.1f, 0.4f, 0.8f, 1.0f); // Light blue color for chairs
 
                 // Chair for front-left
-                drawCube(ourShader, VAO, glm::mat4(1.0f), tablePositionX - 0.8f, -chairLegHeight / 2, tablePositionY -0.5f, 0.0f, 0.0f, 0.0f, chairLegWidth, chairLegHeight, chairLegWidth); // Front-left leg
-                drawCube(ourShader, VAO, glm::mat4(1.0f), tablePositionX - 0.8f, -chairLegHeight / 2, tablePositionY -0.3f, 0.0f, 0.0f, 0.0f, chairLegWidth, chairLegHeight, chairLegWidth); // Front-right leg
-                drawCube(ourShader, VAO, glm::mat4(1.0f), tablePositionX - 0.9f, -chairLegHeight / 2, tablePositionY -0.5f, 0.0f, 0.0f, 0.0f, chairLegWidth, chairLegHeight, chairLegWidth); // Back-left leg
-                drawCube(ourShader, VAO, glm::mat4(1.0f), tablePositionX - 0.9f, -chairLegHeight / 2, tablePositionY -0.3f, 0.0f, 0.0f, 0.0f, chairLegWidth, chairLegHeight, chairLegWidth); // Back-right leg
-                drawCube(ourShader, VAO, glm::mat4(1.0f), tablePositionX - 0.85f, -0.13f, tablePositionY -0.4f, 0.0f, 0.0f, 0.0f, chairSeatWidth, chairSeatHeight, chairSeatWidth); // Seat
-                drawCube(ourShader, VAO, glm::mat4(1.0f), tablePositionX - 0.95f, -0.03f, tablePositionY -0.4f, 0.0f, 90.0f, 0.0f, backrestWidth, backrestHeight, backrestThickness); // Backrest
+                drawCube(ourShader, VAO, glm::mat4(1.0f), tablePositionX - 0.8f, -chairLegHeight / 2 - 0.13f, tablePositionY -0.5f, 0.0f, 0.0f, 0.0f, chairLegWidth, chairLegHeight, chairLegWidth); // Front-left leg
+                drawCube(ourShader, VAO, glm::mat4(1.0f), tablePositionX - 0.8f, -chairLegHeight / 2 - 0.13f, tablePositionY -0.3f, 0.0f, 0.0f, 0.0f, chairLegWidth, chairLegHeight, chairLegWidth); // Front-right leg
+                drawCube(ourShader, VAO, glm::mat4(1.0f), tablePositionX - 0.9f, -chairLegHeight / 2 - 0.13f, tablePositionY -0.5f, 0.0f, 0.0f, 0.0f, chairLegWidth, chairLegHeight, chairLegWidth); // Back-left leg
+                drawCube(ourShader, VAO, glm::mat4(1.0f), tablePositionX - 0.9f, -chairLegHeight / 2 - 0.13f, tablePositionY -0.3f, 0.0f, 0.0f, 0.0f, chairLegWidth, chairLegHeight, chairLegWidth); // Back-right leg
+                drawCube(ourShader, VAO, glm::mat4(1.0f), tablePositionX - 0.85f, -0.13f - 0.13f, tablePositionY -0.4f, 0.0f, 0.0f, 0.0f, chairSeatWidth, chairSeatHeight, chairSeatWidth); // Seat
+                drawCube(ourShader, VAO, glm::mat4(1.0f), tablePositionX - 0.95f, -0.03f - 0.13f, tablePositionY -0.4f, 0.0f, 90.0f, 0.0f, backrestWidth, backrestHeight, backrestThickness); // Backrest
 
                 // Repeat for other chairs (front-right, back-left, back-right) with similar adjustments
             }
@@ -301,7 +301,7 @@ int main()
         glUniform4f(colorLocation, 0.8f, 0.52f, 0.25f, 1.0f);
 
         // Draw the floor
-        drawCube(ourShader, VAO, glm::mat4(1.0f), 7.0f, -legHeight + 0.18f, 0.0f, 0.0f, 0.0f, 0.0f, floorWidth, floorHeight, floorDepth);
+        drawCube(ourShader, VAO, glm::mat4(1.0f), 3.0f, -legHeight + 0.18f, 3.0f, 0.0f, 0.0f, 0.0f, floorWidth, floorHeight, floorDepth);
 
 
 
@@ -399,22 +399,22 @@ void processInput(GLFWwindow* window)
     }
     if (glfwGetKey(window, GLFW_KEY_1) == GLFW_PRESS)
     {
-        lookAtX += 2.5 * deltaTime;
+        lookAtX += 5 * deltaTime;
         basic_camera.lookAt = glm::vec3(lookAtX, lookAtY, lookAtZ);
     }
     if (glfwGetKey(window, GLFW_KEY_2) == GLFW_PRESS)
     {
-        lookAtX -= 2.5 * deltaTime;
+        lookAtX -= 5 * deltaTime;
         basic_camera.lookAt = glm::vec3(lookAtX, lookAtY, lookAtZ);
     }
     if (glfwGetKey(window, GLFW_KEY_3) == GLFW_PRESS)
     {
-        lookAtY += 2.5 * deltaTime;
+        lookAtY += 5 * deltaTime;
         basic_camera.lookAt = glm::vec3(lookAtX, lookAtY, lookAtZ);
     }
     if (glfwGetKey(window, GLFW_KEY_4) == GLFW_PRESS)
     {
-        lookAtY -= 2.5 * deltaTime;
+        lookAtY -= 5 * deltaTime;
         basic_camera.lookAt = glm::vec3(lookAtX, lookAtY, lookAtZ);
     }
 }

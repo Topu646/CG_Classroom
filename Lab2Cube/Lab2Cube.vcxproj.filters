@@ -22,4 +22,20 @@
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="fragmentShader.fs">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="fragmentShaderV2.fs">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="vertexShader.vs">
+      <Filter>Source Files</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="basic_camera.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+  </ItemGroup>
 </Project>

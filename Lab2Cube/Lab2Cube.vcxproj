@@ -136,6 +136,14 @@
     <ClCompile Include="..\..\..\..\..\..\opengl\glad.c" />
     <ClCompile Include="Source.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="fragmentShader.fs" />
+    <None Include="fragmentShaderV2.fs" />
+    <None Include="vertexShader.vs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="basic_camera.h" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

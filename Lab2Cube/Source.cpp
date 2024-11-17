@@ -47,6 +47,7 @@ float translate_Z = 1.0;
 float scale_X = 1.0;
 float scale_Y = 1.0;
 float scale_Z = 1.0;
+bool fanon = false;
 
 // camera
 float lastX = SCR_WIDTH / 2.0f;
@@ -196,6 +197,7 @@ int main()
 
     // render loop
     // -----------
+    float r = 0.0;
     while (!glfwWindowShouldClose(window))
     {
         // per-frame time logic
@@ -307,7 +309,7 @@ int main()
         }
         
 
-        // Set the color for the floor (e.g., light brown)
+        
         glUniform4f(colorLocation, .204f, .22f, .216f,1.0f);
 
         // Draw the floor
@@ -330,6 +332,13 @@ int main()
         drawCube(ourShader, VAO, glm::mat4(1.0f), 8.5f, 0.0f, 3.0f, 0.0f, 0.0f, 0.0f, wallThickness, wallHeight, floorDepth);
 
 
+        //fan
+        glUniform4f(colorLocation, .254f, .12f, .216f, 1.0f);
+        drawCube(ourShader, VAO, glm::mat4(1.0f), 3.0f, + 0.5f, 3.0f, 0.0f, r, 0.0f, 2.0f, 0.2f, 0.2f);
+        drawCube(ourShader, VAO, glm::mat4(1.0f), 3.0f, +0.5f, 3.0f, 0.0f, r+ 90.0f, 0.0f, 2.0f, 0.2f, 0.2f);
+
+        if(fanon)
+            r += 10;
 
         // render boxes
         //for (unsigned int i = 0; i < 10; i++)
@@ -442,6 +451,12 @@ void processInput(GLFWwindow* window)
     {
         lookAtY -= 5 * deltaTime;
         basic_camera.lookAt = glm::vec3(lookAtX, lookAtY, lookAtZ);
+    }
+    if (glfwGetKey(window, GLFW_KEY_P) == GLFW_PRESS)
+    {
+        if (fanon)
+            fanon = false;
+        else fanon = true;
     }
 }
 

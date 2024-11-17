@@ -43,22 +43,6 @@ public:
         return glm::lookAt(eye, direction, V);
     }
 
-    void changeEye(float eyeX, float eyeY, float eyeZ)
-    {
-        eye = glm::vec3(eyeX, eyeY, eyeZ);
-    }
-
-    void changeLookAt(float lookAtX, float lookAtY, float lookAtZ)
-    {
-        lookAt = glm::vec3(lookAtX, lookAtY, lookAtZ);
-    }
-
-    void changeViewUpVector(glm::vec3 viewUpVector)
-    {
-        V = viewUpVector;
-    }
-
-
     // processes input received from a mouse scroll-wheel event. Only requires input on the vertical wheel-axis
     void ProcessMouseScroll(float yoffset)
     {

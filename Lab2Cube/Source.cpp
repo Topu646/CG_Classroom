@@ -225,16 +225,84 @@ int main()
         ourShader.setMat4("view", view);
         //constantShader.setMat4("view", view);
 
+        float legWidth = 0.1f;
+        float legHeight = 0.7f;
+        float topWidth = 2.0f;
+        float topHeight = 0.1f;
+
+        float chairLegWidth = 0.08f;
+        float chairLegHeight = 0.5f;
+        float chairSeatWidth = 0.5f;
+        float chairSeatHeight = 0.08f;
+
+        // Chair Backrest dimensions
+        float backrestWidth = chairSeatWidth; // Same width as the seat
+        float backrestHeight = 0.4f; // Height of the backrest
+        float backrestThickness = 0.05f; // Thickness of the backrest
+
+        // Floor dimensions
+        float floorWidth = 22.0f; // Adjust to cover the entire row of tables
+        float floorHeight = 0.05f; // Thickness of the floor
+        float floorDepth = 22.0f; // Depth to fit all chairs and tables
+
+        float tableOffset = 2.5f;
+
+
+
         // Modelling Transformation
         glm::mat4 identityMatrix = glm::mat4(1.0f); // make sure to initialize matrix to identity matrix first
         // drawCube(ourShader, VAO, identityMatrix, translate_X, translate_Y, translate_Z, rotateAngle_X, rotateAngle_Y, rotateAngle_Z, scale_X, scale_Y, scale_Z);
-        drawCube(ourShader, VAO, identityMatrix, 0.0f, 0.0f, 0.0f, rotateAngle_X, rotateAngle_Y, rotateAngle_Z, scale_X, scale_Y, scale_Z);
+        // Table top
 
-        drawCube(ourShader, VAO, identityMatrix, 1.0f, 0.0f, 0.0f, rotateAngle_X, rotateAngle_Y, rotateAngle_Z, scale_X, scale_Y, scale_Z);
+        ourShader.use();
+        GLuint colorLocation = glGetUniformLocation(ourShader.ID, "color");
+        
 
-        drawCube(ourShader, VAO, identityMatrix, 0.0f, 1.0f, 0.0f, rotateAngle_X, rotateAngle_Y, rotateAngle_Z, scale_X, scale_Y, scale_Z);
+        
+        
+        for (int j = 0; j < 4; j++) {
+            float tablePositionY = j * tableOffset;
 
-        drawCube(ourShader, VAO, identityMatrix, 0.0f, 0.0f, 1.0f, rotateAngle_X, rotateAngle_Y, rotateAngle_Z, scale_X, scale_Y, scale_Z);
+            for (int i = 0; i < 4; i++) { // Create 4 tables with chairs
+                float tablePositionX = i * tableOffset; // Position each table along the X-axis
+
+                // --- Draw Table ---
+                // Set color for the table (e.g., brown color for the table)
+                glUniform4f(colorLocation, 0.6f, 0.3f, 0.1f, 1.0f); // Brown color for the table
+
+                // Table legs
+                drawCube(ourShader, VAO, glm::mat4(1.0f), tablePositionX - 0.45f, -legHeight / 2, tablePositionY -0.35f, 0.0f, 0.0f, 0.0f, legWidth, legHeight, legWidth); // Front-left leg
+                drawCube(ourShader, VAO, glm::mat4(1.0f), tablePositionX + 0.45f, -legHeight / 2, tablePositionY -0.35f, 0.0f, 0.0f, 0.0f, legWidth, legHeight, legWidth); // Front-right leg
+                drawCube(ourShader, VAO, glm::mat4(1.0f), tablePositionX - 0.45f, -legHeight / 2, tablePositionY + 0.35f, 0.0f, 0.0f, 0.0f, legWidth, legHeight, legWidth);  // Back-left leg
+                drawCube(ourShader, VAO, glm::mat4(1.0f), tablePositionX + 0.45f, -legHeight / 2, tablePositionY + 0.35f, 0.0f, 0.0f, 0.0f, legWidth, legHeight, legWidth);  // Back-right leg
+
+                // Table top
+                drawCube(ourShader, VAO, glm::mat4(1.0f), tablePositionX, -0.15f, tablePositionY+ 0.0f, 0.0f, 0.0f, 0.0f, topWidth, topHeight, topWidth);
+
+                // --- Draw Chairs ---
+                // Set color for the chair (e.g., light blue color for the chair)
+                glUniform4f(colorLocation, 0.1f, 0.4f, 0.8f, 1.0f); // Light blue color for chairs
+
+                // Chair for front-left
+                drawCube(ourShader, VAO, glm::mat4(1.0f), tablePositionX - 0.8f, -chairLegHeight / 2, tablePositionY -0.5f, 0.0f, 0.0f, 0.0f, chairLegWidth, chairLegHeight, chairLegWidth); // Front-left leg
+                drawCube(ourShader, VAO, glm::mat4(1.0f), tablePositionX - 0.8f, -chairLegHeight / 2, tablePositionY -0.3f, 0.0f, 0.0f, 0.0f, chairLegWidth, chairLegHeight, chairLegWidth); // Front-right leg
+                drawCube(ourShader, VAO, glm::mat4(1.0f), tablePositionX - 0.9f, -chairLegHeight / 2, tablePositionY -0.5f, 0.0f, 0.0f, 0.0f, chairLegWidth, chairLegHeight, chairLegWidth); // Back-left leg
+                drawCube(ourShader, VAO, glm::mat4(1.0f), tablePositionX - 0.9f, -chairLegHeight / 2, tablePositionY -0.3f, 0.0f, 0.0f, 0.0f, chairLegWidth, chairLegHeight, chairLegWidth); // Back-right leg
+                drawCube(ourShader, VAO, glm::mat4(1.0f), tablePositionX - 0.85f, -0.13f, tablePositionY -0.4f, 0.0f, 0.0f, 0.0f, chairSeatWidth, chairSeatHeight, chairSeatWidth); // Seat
+                drawCube(ourShader, VAO, glm::mat4(1.0f), tablePositionX - 0.95f, -0.03f, tablePositionY -0.4f, 0.0f, 90.0f, 0.0f, backrestWidth, backrestHeight, backrestThickness); // Backrest
+
+                // Repeat for other chairs (front-right, back-left, back-right) with similar adjustments
+            }
+
+        }
+        
+
+        // Set the color for the floor (e.g., light brown)
+        glUniform4f(colorLocation, 0.8f, 0.52f, 0.25f, 1.0f);
+
+        // Draw the floor
+        drawCube(ourShader, VAO, glm::mat4(1.0f), 7.0f, -legHeight + 0.18f, 0.0f, 0.0f, 0.0f, 0.0f, floorWidth, floorHeight, floorDepth);
+
 
 
         // render boxes

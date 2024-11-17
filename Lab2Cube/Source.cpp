@@ -48,6 +48,7 @@ float scale_X = 1.0;
 float scale_Y = 1.0;
 float scale_Z = 1.0;
 bool fanon = false;
+bool fan2on = false;
 
 // camera
 float lastX = SCR_WIDTH / 2.0f;
@@ -197,7 +198,7 @@ int main()
 
     // render loop
     // -----------
-    float r = 0.0;
+    float r = 0.0,rr=0.0;
     while (!glfwWindowShouldClose(window))
     {
         // per-frame time logic
@@ -337,8 +338,16 @@ int main()
         drawCube(ourShader, VAO, glm::mat4(1.0f), 3.0f, + 0.5f, 3.0f, 0.0f, r, 0.0f, 2.0f, 0.2f, 0.2f);
         drawCube(ourShader, VAO, glm::mat4(1.0f), 3.0f, +0.5f, 3.0f, 0.0f, r+ 90.0f, 0.0f, 2.0f, 0.2f, 0.2f);
 
+        //fan 2
+        glUniform4f(colorLocation, .254f, .12f, .216f, 1.0f);
+        drawCube(ourShader, VAO, glm::mat4(1.0f), 5.0f, +0.5f, 3.0f, 0.0f, rr, 0.0f, 2.0f, 0.2f, 0.2f);
+        drawCube(ourShader, VAO, glm::mat4(1.0f), 5.0f, +0.5f, 3.0f, 0.0f, rr + 90.0f, 0.0f, 2.0f, 0.2f, 0.2f);
+
         if(fanon)
             r += 10;
+
+        if (fan2on)
+            rr += 10;
 
         // render boxes
         //for (unsigned int i = 0; i < 10; i++)
@@ -457,6 +466,12 @@ void processInput(GLFWwindow* window)
         if (fanon)
             fanon = false;
         else fanon = true;
+    }
+    if (glfwGetKey(window, GLFW_KEY_O) == GLFW_PRESS)
+    {
+        if (fan2on)
+            fan2on = false;
+        else fan2on = true;
     }
 }
 

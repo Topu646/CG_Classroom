@@ -343,6 +343,9 @@ int main()
         drawCube(ourShader, VAO, glm::mat4(1.0f), 5.0f, +0.5f, 3.0f, 0.0f, rr, 0.0f, 2.0f, 0.2f, 0.2f);
         drawCube(ourShader, VAO, glm::mat4(1.0f), 5.0f, +0.5f, 3.0f, 0.0f, rr + 90.0f, 0.0f, 2.0f, 0.2f, 0.2f);
 
+        // Right wall
+        drawCube(ourShader, VAO, glm::mat4(1.0f), 8.4f, 0.2f, 3.0f, 0.0f, 0.0f, 0.0f, wallThickness-.02f, 1.0f, 11.0f);
+
         if(fanon)
             r += 10;
 
